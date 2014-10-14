@@ -3,7 +3,7 @@
 
 Пример работы
 ------------
-[vk.com/quiz0]http://vk.com/quiz0
+[vk.com/quiz0](http://vk.com/quiz0)
 
 Описание
 ------------
