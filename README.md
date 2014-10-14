@@ -1,77 +1,37 @@
-ZendSkeletonApplication
+Викторина - бот для ВКонтакте (vk.com)
 =======================
 
-Introduction
+Пример работы
 ------------
-This is a simple, skeleton application using the ZF2 MVC layer and module
-systems. This application is meant to be used as a starting place for those
-looking to get their feet wet with ZF2.
+[vk.com/quiz0]http://vk.com/quiz0
 
-Installation
+Описание
+------------
+Бот постит вопросы в группу и ожидает ответа пользователей
+
+Требования
 ------------
 
-Using Composer (recommended)
-----------------------------
-The recommended way to get a working copy of this project is to clone the repository
-and use `composer` to install dependencies using the `create-project` command:
+1. php 5.3+
+2. mysql 5.1+
+3. Standalone-приложение ВК(создаётся бесплатно в ВК)
 
-    curl -s https://getcomposer.org/installer | php --
-    php composer.phar create-project -sdev --repository-url="https://packages.zendframework.com" zendframework/skeleton-application path/to/install
+Установка
+------------
 
-Alternately, clone the repository and manually invoke `composer` using the shipped
-`composer.phar`:
+1. Установить Composer: [getcomposer.org](https://getcomposer.org/)
+2. Установить зависимости: #`php composer.phar update`
+3. Настроить бота
+    * импортировать в mysql `db-sheme.sql`
+    * импортировать базу вопросов в таблицу `question` (готовую можно найти в гугле)
+    * переименовать local.php.example в local.php и настроить
+    * получить access_token для зарегистрированного ранее standalone-приложения
+    * указать id-группы и access_token в файле `module/Application/src/Application/Vk/Service.php`
+4. Запустить бота: #`php public/index.php start`
 
-    cd my/project/dir
-    git clone git://github.com/zendframework/ZendSkeletonApplication.git
-    cd ZendSkeletonApplication
-    php composer.phar self-update
-    php composer.phar install
+Известные проблемы
+----------
 
-(The `self-update` directive is to ensure you have an up-to-date `composer.phar`
-available.)
-
-Another alternative for downloading the project is to grab it via `curl`, and
-then pass it to `tar`:
-
-    cd my/project/dir
-    curl -#L https://github.com/zendframework/ZendSkeletonApplication/tarball/master | tar xz --strip-components=1
-
-You would then invoke `composer` to install dependencies per the previous
-example.
-
-Using Git submodules
---------------------
-Alternatively, you can install using native git submodules:
-
-    git clone git://github.com/zendframework/ZendSkeletonApplication.git --recursive
-
-Web Server Setup
-----------------
-
-### PHP CLI Server
-
-The simplest way to get started if you are using PHP 5.4 or above is to start the internal PHP cli-server in the root directory:
-
-    php -S 0.0.0.0:8080 -t public/ public/index.php
-
-This will start the cli-server on port 8080, and bind it to all network
-interfaces.
-
-**Note: ** The built-in CLI server is *for development only*.
-
-### Apache Setup
-
-To setup apache, setup a virtual host to point to the public/ directory of the
-project and you should be ready to go! It should look something like below:
-
-    <VirtualHost *:80>
-        ServerName zf2-tutorial.localhost
-        DocumentRoot /path/to/zf2-tutorial/public
-        SetEnv APPLICATION_ENV "development"
-        <Directory /path/to/zf2-tutorial/public>
-            DirectoryIndex index.php
-            AllowOverride All
-            Order allow,deny
-            Allow from all
-        </Directory>
-    </VirtualHost>
+1. Бот не может постить более 200 постов в день в группу - это лимит ВК
+2. Время от времени ВК не даёт редактировать посты и отвечать в сообщениях без капчи. 
+Обычно это длится час-два, на это время бот лишён возможности выводить правильные ответы и/или давать подсказки.

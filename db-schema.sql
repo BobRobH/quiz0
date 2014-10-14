@@ -1,0 +1,19 @@
+﻿
+CREATE TABLE question (
+  id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  question text NOT NULL,
+  answer text NOT NULL,
+  PRIMARY KEY (id)
+)
+ENGINE = INNODB
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
+
+CREATE TABLE result (
+  user_id int(10) UNSIGNED NOT NULL,
+  question_id int(10) UNSIGNED NOT NULL,
+  added_time timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)
+ENGINE = INNODB
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
